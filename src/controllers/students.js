@@ -5,7 +5,7 @@ const getAllStudents = async (req,res) => {
    res.json(students);
 }
 
-const getStudentById = () => {
+const getStudentById = (req) => {
     // StudentModel.find({id: 'id'});
 }
 
