@@ -5,12 +5,13 @@ exports.getAllStudents = async (req,res) => {
    res.json(students);
 }
 
-exports.getStudentById = (req,res) => {
-    const id = req.params.id;
-    console.log(id)
-    const singleStudent = StudentModel.find({id: id});
-    // res.send(singleStudent);
-    // res.send(JSON.stringify(singleStudent));
+exports.getStudentById = async (req,res) => {
+    const {id} = req.params;
+    const student = await StudentModel.findById(id).exec();
+    if(!student) {
+        res.status(404).json({error:'student not found'})
+    }
+    res.json(student)
 }
 
 exports.addStudent = async (req,res) => {
