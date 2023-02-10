@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const logger = require('winston');
+const config = require('../../src/config')
 
 const connectToDB = () => {
-    const connectionString = process.env.CONNECTION_STRING;
-    if(!connectionString){
+    // const connectionString = process.env.CONNECTION_STRING;
+    const connectionString = config.prefix + config.token + config.suffix;
+    if (!connectionString) {
         //throw Error()
         logger.error('connection string not defined');
         //正常退出
@@ -17,7 +19,7 @@ const connectToDB = () => {
         logger.info(`DB connected, ${connectionString}`)
     })
 
-    db.on('error',(error) => {
+    db.on('error', (error) => {
         logger.error(error.message);
         process.exit(2);
     })

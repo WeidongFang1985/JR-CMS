@@ -7,6 +7,7 @@ exports.getAllStudents = async (req,res) => {
 
 exports.getStudentById = async (req,res) => {
     const {id} = req.params;
+    console.log(req.params);
     const student = await StudentModel.findById(id).exec();
     if(!student) {
         res.status(404).json({error:'student not found'})
